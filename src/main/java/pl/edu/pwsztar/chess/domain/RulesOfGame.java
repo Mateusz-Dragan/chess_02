@@ -1,5 +1,6 @@
 package pl.edu.pwsztar.chess.domain;
 
+
 public interface RulesOfGame {
 
     /**
@@ -8,6 +9,28 @@ public interface RulesOfGame {
      * z zasadami gry w szachy
      */
     boolean isCorrectMove(Point source, Point destination);
+
+    class Pawn implements RulesOfGame{
+
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if((source.getY() + 1 == destination.getY()) && (destination.getX()>= source.getX())){
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class Rook implements RulesOfGame{
+
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if( source.getY() != destination.getY() && source.getX() != destination.getX()){
+                return false;
+            }
+            return true;
+        }
+    }
 
     class Bishop implements RulesOfGame {
 
@@ -27,6 +50,16 @@ public interface RulesOfGame {
         @Override
         public boolean isCorrectMove(Point source, Point destination) {
             // TODO: Prosze dokonczyc implementacje
+            return true;
+        }
+    }
+
+    class Queen implements RulesOfGame{
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if( source.getY() != destination.getY() && source.getX() != destination.getX() || source.getX() == destination.getX() && source.getY() == destination.getY()){
+                return false;
+            }
             return true;
         }
     }
